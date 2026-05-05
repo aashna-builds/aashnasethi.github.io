@@ -385,14 +385,65 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 220px 1fr;
-      gap: 48px;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
       align-items: start;
     }
 
-    @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr 1fr; }
-      .about-portrait { display: none; }
+    /* Hero layout */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-portrait {
+      width: 100%;
+      aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: contrast(1.15) brightness(0.85) grayscale(0.1);
+    }
+    .hero-portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, #0A0A0A 0%, transparent 18%, transparent 65%, #0A0A0A 100%),
+        linear-gradient(to right, transparent 55%, #0A0A0A 100%),
+        linear-gradient(to left, transparent 85%, #0A0A0A 100%);
+      pointer-events: none;
+    }
+
+    /* Quote */
+    .quote-section {
+      padding: 48px 0;
+      border-bottom: 0.5px solid var(--border);
+      text-align: center;
+    }
+    .quote-text {
+      font-size: clamp(16px, 2vw, 20px);
+      font-style: italic;
+      color: var(--text-3);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.7;
+      letter-spacing: -0.2px;
+    }
+    .quote-text span { color: var(--text-2); }
+
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-portrait { display: none; }
     }
 
     .about-stats-grid {
@@ -829,57 +880,73 @@
   <!-- HERO -->
   <section class="hero" aria-label="Introduction">
     <div class="container">
-      <div class="hero-tags fade-up">
-        <span class="tag tag-purple">AI Enablement</span>
-        <span class="tag tag-dim">Governance</span>
-        <span class="tag tag-dim">Tooling</span>
-        <span class="tag tag-dim">Engineering</span>
-      </div>
-
-      <h1 class="hero-h1 fade-up">
-        Enabling AI.<br>
-        <span class="grad-text">Governing the risk.</span><br>
-        Building the tools.
-      </h1>
-
-      <p class="hero-sub fade-up">
-        I work at the intersection of AI engineering, governance, and enablement — helping organizations adopt AI that's production-ready, compliant, and built to last. Engaged in the AI space since 2018.
-      </p>
-
-      <div class="btn-row fade-up">
-        <a href="#experience" class="btn-primary">View my work</a>
-        <a href="Aashna_Sethi_Resume_PlatformEngineer.docx" class="btn-secondary" download>Download resume</a>
-      </div>
-
-      <div class="hero-divider"></div>
-
-      <div class="stats-row">
+      <div class="hero-grid">
         <div>
-          <div class="stat-val">7+</div>
-          <div class="stat-label">Years in AI</div>
-        </div>
-        <div>
-          <div class="stat-val">ISO 42001</div>
-          <div class="stat-label">Led certification</div>
-        </div>
-        <div>
-          <div class="stat-val">3 orgs</div>
-          <div class="stat-label">Governed</div>
-        </div>
-        <div>
-          <div class="stat-val">1 platform</div>
-          <div class="stat-label">Built from zero</div>
-        </div>
-      </div>
+          <div class="hero-tags fade-up">
+            <span class="tag tag-purple">AI Enablement</span>
+            <span class="tag tag-dim">Governance</span>
+            <span class="tag tag-dim">Tooling</span>
+            <span class="tag tag-dim">Engineering</span>
+          </div>
 
-      <div class="badge-strip">
-        <span class="badge-lit">AI Enablement</span>
-        <span class="badge">ISO 42001</span>
-        <span class="badge">SOC 2</span>
-        <span class="badge">GDPR · EU AI Act</span>
-        <span class="badge">Next.js · Claude</span>
-        <span class="badge">Vancouver, BC · PR Canada</span>
+          <h1 class="hero-h1 fade-up">
+            Enabling AI.<br>
+            <span class="grad-text">Governing the risk.</span><br>
+            Building the tools.
+          </h1>
+
+          <p class="hero-sub fade-up">
+            I work at the intersection of AI engineering, governance, and enablement — helping organizations adopt AI that's production-ready, compliant, and built to last. Engaged in the AI space since 2018.
+          </p>
+
+          <div class="btn-row fade-up">
+            <a href="#experience" class="btn-primary">View my work</a>
+            <a href="Aashna_Sethi_Resume_PlatformEngineer.docx" class="btn-secondary" download>Download resume</a>
+          </div>
+
+          <div class="hero-divider"></div>
+
+          <div class="stats-row">
+            <div>
+              <div class="stat-val">7+</div>
+              <div class="stat-label">Years in AI</div>
+            </div>
+            <div>
+              <div class="stat-val">ISO 42001</div>
+              <div class="stat-label">Led certification</div>
+            </div>
+            <div>
+              <div class="stat-val">3 orgs</div>
+              <div class="stat-label">Governed</div>
+            </div>
+            <div>
+              <div class="stat-val">1 platform</div>
+              <div class="stat-label">Built from zero</div>
+            </div>
+          </div>
+
+          <div class="badge-strip">
+            <span class="badge-lit">AI Enablement</span>
+            <span class="badge">ISO 42001</span>
+            <span class="badge">SOC 2</span>
+            <span class="badge">GDPR · EU AI Act</span>
+            <span class="badge">Next.js · Claude</span>
+            <span class="badge">Vancouver, BC · PR Canada</span>
+          </div>
+        </div>
+
+        <!-- Portrait -->
+        <div class="hero-portrait">
+          <img src="assets/finalheadshot.png" alt="Aashna Sethi" />
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section" aria-label="Quote">
+    <div class="container">
+      <p class="quote-text">"AI is not here to replace us — it's here to <span>expand our intellect</span> so we can focus on what matters: <span>innovation.</span>"</p>
     </div>
   </section>
 
@@ -915,11 +982,6 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Portrait -->
-        <div class="about-portrait">
-          <img src="assets/finalheadshot.png" alt="Aashna Sethi" loading="lazy" />
         </div>
 
         <!-- Stats -->
