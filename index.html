@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aashna Sethi — AI Enablement · Governance · Tooling · Engineering</title>
+  <meta name="description" content="Aashna Sethi — AI Platform Engineer at the intersection of full-stack engineering, governance, and enablement. Building AI infrastructure that's production-ready and compliant." />
+  <style>
+    /* =====================
+       RESET & BASE
+    ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0A0A0A;
+      --bg-card:   #111111;
+      --bg-subtle: #161616;
+      --border:    rgba(255,255,255,0.07);
+      --border-md: rgba(255,255,255,0.12);
+      --text-1:    #FFFFFF;
+      --text-2:    rgba(255,255,255,0.72);
+      --text-3:    rgba(255,255,255,0.42);
+      --text-4:    rgba(255,255,255,0.22);
+      --purple:    #9585F5;
+      --purple-bg: rgba(99,84,220,0.18);
+      --purple-bd: rgba(140,125,255,0.35);
+      --teal:      #5DCAA5;
+      --teal-bg:   rgba(29,158,117,0.14);
+      --teal-bd:   rgba(29,158,117,0.28);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-2);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* =====================
+       GRAIN OVERLAY
+    ===================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      opacity: 0.48;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* =====================
+       GLOW LAYERS
+    ===================== */
+    .glow-hero {
+      position: fixed;
+      top: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 560px;
+      background: radial-gradient(ellipse at center, rgba(99,84,220,0.28) 0%, rgba(99,84,220,0.08) 42%, transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-br {
+      position: fixed;
+      bottom: -100px;
+      right: -80px;
+      width: 500px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(29,158,117,0.16) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* =====================
+       LAYOUT
+    ===================== */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    /* =====================
+       NAV
+    ===================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 0.5px solid var(--border);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-2); }
+
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(185,175,255,1) !important;
+      background: var(--purple-bg);
+      border: 0.5px solid var(--purple-bd);
+      padding: 7px 16px;
+      border-radius: 100px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: rgba(99,84,220,0.28) !important; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-2);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      padding: 96px 0 80px;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 100px;
+    }
+    .tag-purple {
+      color: rgba(185,175,255,1);
+      background: var(--purple-bg);
+      border: 0.5px solid var(--purple-bd);
+    }
+    .tag-dim {
+      color: var(--text-3);
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid var(--border);
+    }
+
+    .hero-h1 {
+      font-size: clamp(36px, 5.5vw, 56px);
+      font-weight: 500;
+      letter-spacing: -2px;
+      line-height: 1.07;
+      color: var(--text-1);
+      margin-bottom: 22px;
+    }
+
+    .grad-text {
+      background: linear-gradient(100deg, #c4bbff 0%, #9585f5 45%, #5DCAA5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--text-2);
+      line-height: 1.75;
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 56px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 26px;
+      background: rgba(140,125,255,0.9);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: -0.1px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: rgba(140,125,255,1); }
+
+    .btn-secondary {
+      display: inline-block;
+      font-size: 14px;
+      padding: 12px 26px;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-2);
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+    .hero-divider {
+      height: 0.5px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .stat-val {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-3);
+      letter-spacing: 0.3px;
+    }
+
+    .badge-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 18px 0;
+      margin-top: 40px;
+      border-top: 0.5px solid var(--border);
+    }
+    .badge {
+      font-size: 11px;
+      color: var(--text-3);
+      border: 0.5px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      padding: 4px 13px;
+      border-radius: 100px;
+    }
+    .badge-lit {
+      font-size: 11px;
+      color: rgba(185,175,255,0.95);
+      border: 0.5px solid var(--purple-bd);
+      background: var(--purple-bg);
+      padding: 4px 13px;
+      border-radius: 100px;
+    }
+
+    /* =====================
+       SECTION BASE
+    ===================== */
+    .section {
+      padding: 72px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--text-4);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--border);
+    }
+
+    .section-title {
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .section-body {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.8;
+      max-width: 580px;
+      margin-bottom: 14px;
+    }
+
+    /* =====================
+       ABOUT
+    ===================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .about-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .stat-card-val {
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: -0.8px;
+      margin-bottom: 5px;
+      line-height: 1;
+    }
+    .stat-card-label {
+      font-size: 12px;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+
+    .degree-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .degree-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+    }
+    .degree-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      background: var(--purple-bg);
+      border: 0.5px solid var(--purple-bd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .degree-text { font-size: 13px; color: var(--text-2); line-height: 1.4; }
+    .degree-text strong { color: var(--text-1); font-weight: 500; display: block; }
+
+    /* =====================
+       EXPERIENCE
+    ===================== */
+    .exp-list { display: flex; flex-direction: column; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      padding: 36px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-meta { padding-top: 3px; }
+    .exp-date { font-size: 12px; color: var(--text-3); line-height: 1.7; margin-bottom: 6px; }
+    .exp-location { font-size: 11px; color: var(--text-4); }
+
+    .exp-company {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--purple);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .exp-role {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .exp-bullets li {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.7;
+      padding-left: 18px;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--text-4);
+      font-size: 12px;
+      top: 3px;
+    }
+
+    /* =====================
+       SKILLS
+    ===================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .skill-block {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+    }
+    .skill-block-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+    .pill-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill {
+      font-size: 12px;
+      color: var(--text-2);
+      background: rgba(255,255,255,0.05);
+      border: 0.5px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+    .pill-accent {
+      font-size: 12px;
+      color: rgba(185,175,255,0.95);
+      background: var(--purple-bg);
+      border: 0.5px solid var(--purple-bd);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+    .pill-teal {
+      font-size: 12px;
+      color: rgba(93,202,165,0.95);
+      background: var(--teal-bg);
+      border: 0.5px solid var(--teal-bd);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    /* =====================
+       CONTACT
+    ===================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .contact-headline {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .contact-sub {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 28px;
+    }
+
+    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .contact-btn-primary {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 20px;
+      background: rgba(140,125,255,0.9);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-btn-primary:hover { background: rgba(140,125,255,1); }
+
+    .contact-btn {
+      display: inline-block;
+      font-size: 13px;
+      color: var(--text-2);
+      border: 0.5px solid var(--border-md);
+      background: rgba(255,255,255,0.04);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-btn:hover { background: rgba(255,255,255,0.07); }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--purple-bg);
+      border: 0.5px solid var(--purple-bd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 500;
+      color: rgba(185,175,255,1);
+      flex-shrink: 0;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 24px 0;
+      border-top: 0.5px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-left { font-size: 12px; color: var(--text-4); }
+    .footer-right { display: flex; gap: 24px; }
+    .footer-right a { font-size: 12px; color: var(--text-4); text-decoration: none; transition: color 0.2s; }
+    .footer-right a:hover { color: var(--text-3); }
+
+    /* =====================
+       MOBILE
+    ===================== */
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10,10,10,0.97);
+        padding: 20px;
+        gap: 18px;
+        border-bottom: 0.5px solid var(--border);
+        z-index: 99;
+      }
+      .nav-toggle { display: flex; }
+
+      .hero { padding: 64px 0 56px; }
+      .hero-h1 { letter-spacing: -1.2px; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .about-stats-grid { grid-template-columns: 1fr 1fr; }
+
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .exp-meta { display: flex; gap: 12px; align-items: baseline; }
+
+      .skills-grid { grid-template-columns: 1fr; }
+
+      .contact-grid { grid-template-columns: 1fr; }
+      .avatar { display: none; }
+
+      .stats-row { gap: 24px; }
+    }
+
+    /* =====================
+       ANIMATIONS
+    ===================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    .fade-up:nth-child(2) { animation-delay: 0.1s; }
+    .fade-up:nth-child(3) { animation-delay: 0.2s; }
+    .fade-up:nth-child(4) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <div class="glow-hero" aria-hidden="true"></div>
+  <div class="glow-br" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">Aashna Sethi</a>
+        <ul class="nav-links" id="nav-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact" class="nav-cta">Let's talk</a></li>
+        </ul>
+        <div class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" role="button" tabindex="0">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Introduction">
+    <div class="container">
+      <div class="hero-tags fade-up">
+        <span class="tag tag-purple">AI Enablement</span>
+        <span class="tag tag-dim">Governance</span>
+        <span class="tag tag-dim">Tooling</span>
+        <span class="tag tag-dim">Engineering</span>
+      </div>
+
+      <h1 class="hero-h1 fade-up">
+        Enabling AI.<br>
+        <span class="grad-text">Governing the risk.</span><br>
+        Building the tools.
+      </h1>
+
+      <p class="hero-sub fade-up">
+        I work at the intersection of AI engineering, governance, and enablement — helping organizations adopt AI that's production-ready, compliant, and built to last. Engaged in the AI space since 2018.
+      </p>
+
+      <div class="btn-row fade-up">
+        <a href="#experience" class="btn-primary">View my work</a>
+        <a href="Aashna_Sethi_Resume_PlatformEngineer.docx" class="btn-secondary" download>Download resume</a>
+      </div>
+
+      <div class="hero-divider"></div>
+
+      <div class="stats-row">
+        <div>
+          <div class="stat-val">7+</div>
+          <div class="stat-label">Years in AI</div>
+        </div>
+        <div>
+          <div class="stat-val">ISO 42001</div>
+          <div class="stat-label">Led certification</div>
+        </div>
+        <div>
+          <div class="stat-val">3 orgs</div>
+          <div class="stat-label">Governed</div>
+        </div>
+        <div>
+          <div class="stat-val">1 platform</div>
+          <div class="stat-label">Built from zero</div>
+        </div>
+      </div>
+
+      <div class="badge-strip">
+        <span class="badge-lit">AI Enablement</span>
+        <span class="badge">ISO 42001</span>
+        <span class="badge">SOC 2</span>
+        <span class="badge">GDPR · EU AI Act</span>
+        <span class="badge">Next.js · Claude</span>
+        <span class="badge">Vancouver, BC · PR Canada</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about" aria-label="About">
+    <div class="container">
+      <div class="section-eyebrow">About</div>
+      <div class="about-grid">
+        <div>
+          <h2 class="section-title">Where engineering meets governance.</h2>
+          <p class="section-body">
+            Most people either build AI systems or govern them. I do both. My background spans full-stack AI platform engineering, law, and compliance infrastructure — which means I can ship production tooling and design the policy layer on top of it.
+          </p>
+          <p class="section-body">
+            At SOCi I architected a company-wide AI platform from zero — including agent intake systems, vendor review tooling, and a compliance co-pilot — while simultaneously leading AI governance strategy. Before that, I led ISO 42001 certification across three SaaS brands, making them among the earliest to achieve the standard.
+          </p>
+          <p class="section-body">
+            I've been engaged in the AI space since 2018. I'm fluent in the language of engineering teams and legal teams, which means I build things both sides can actually use.
+          </p>
+          <div class="degree-badges">
+            <div class="degree-badge">
+              <div class="degree-icon">⚖</div>
+              <div class="degree-text">
+                <strong>Master of Laws (LL.M.)</strong>
+                Law & Technology
+              </div>
+            </div>
+            <div class="degree-badge">
+              <div class="degree-icon">🎓</div>
+              <div class="degree-text">
+                <strong>B.A. LL.B. — Dual Degree</strong>
+                Law & Liberal Arts
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-val">7+</div>
+            <div class="stat-card-label">Years engaged in AI</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-val">2018</div>
+            <div class="stat-card-label">When I entered the AI space</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-val">ISO<br><span style="font-size:16px;">42001</span></div>
+            <div class="stat-card-label">Led org certification</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-val">3</div>
+            <div class="stat-card-label">SaaS orgs governed as DPO</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience" aria-label="Experience">
+    <div class="container">
+      <div class="section-eyebrow">Experience</div>
+      <h2 class="section-title">Where I've worked</h2>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-date">2025 — Present</div>
+            <div class="exp-location">Vancouver, BC</div>
+          </div>
+          <div>
+            <div class="exp-company">SOCi</div>
+            <div class="exp-role">AI Platform Engineer · AI & Privacy Analyst</div>
+            <ul class="exp-bullets">
+              <li>Architected and shipped a full-stack AI platform from zero — production-grade, deployed company-wide, built entirely with Next.js, Claude, Claude Code, and GitHub.</li>
+              <li>Engineered platform modules including an AI agent approval system, vendor security review tool powered by Claude, a compliance co-pilot for security questionnaires, and an internal agent registry with risk-tier classification.</li>
+              <li>Designed and enforced AI governance controls across the organization — authored policy, defined risk tiers, built agent intake workflows, and established guardrails for GitHub Copilot and AI coding tools.</li>
+              <li>Built and launched a company-wide AI training program: interactive web-based course with assessment, certification tracking, and multi-track live curriculum from AI fundamentals to Claude Code.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-date">Dec 2022 — Jun 2025</div>
+            <div class="exp-location">Vancouver, BC</div>
+          </div>
+          <div>
+            <div class="exp-company">Unbounce / Insightly / LeadsRx</div>
+            <div class="exp-role">Data Privacy & Compliance Specialist · DPO</div>
+            <ul class="exp-bullets">
+              <li>Led ISO 42001 (AI Management System) certification — one of the earliest SaaS organizations to achieve this standard. Scoped the program, built the compliance infrastructure, coordinated across Legal, Engineering, and Product.</li>
+              <li>Acted as DPO across three SaaS brands; governed AI feature rollouts by conducting DPIAs, reviewing AI vendor security postures, and enforcing compliance controls on ML-powered product capabilities.</li>
+              <li>Operationalized SOC 2 and GDPR compliance using Drata and Vanta — automating evidence collection, vendor risk workflows, and audit readiness across engineering and product teams.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-date">Nov 2021 — Nov 2022</div>
+            <div class="exp-location">Remote</div>
+          </div>
+          <div>
+            <div class="exp-company">AIM Associates</div>
+            <div class="exp-role">Head of Compliance</div>
+            <ul class="exp-bullets">
+              <li>Built AI and data compliance frameworks for clients across SaaS, finance, and education — including vendor risk reviews, breach response infrastructure, and regulatory gap assessments under GDPR, SOC 2, and PCI-DSS.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-date">Jan 2021 — Nov 2022</div>
+            <div class="exp-location">Global</div>
+          </div>
+          <div>
+            <div class="exp-company">Independent</div>
+            <div class="exp-role">Privacy & Compliance Consultant</div>
+            <ul class="exp-bullets">
+              <li>Delivered compliance readiness programs, regulatory gap analyses, and privacy policy infrastructure for clients across multiple industries and jurisdictions.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills" aria-label="Skills">
+    <div class="container">
+      <div class="section-eyebrow">Skills</div>
+      <h2 class="section-title">What I work with</h2>
+      <div class="skills-grid">
+        <div class="skill-block">
+          <div class="skill-block-title">Engineering</div>
+          <div class="pill-wrap">
+            <span class="pill-accent">Next.js</span>
+            <span class="pill-accent">JavaScript</span>
+            <span class="pill-accent">REST APIs</span>
+            <span class="pill">HTML / CSS</span>
+            <span class="pill">CI/CD</span>
+            <span class="pill">GitHub</span>
+            <span class="pill">Web deployment</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-block-title">AI Platforms & Tools</div>
+          <div class="pill-wrap">
+            <span class="pill-accent">Claude</span>
+            <span class="pill-accent">Claude Code</span>
+            <span class="pill">GitHub Copilot</span>
+            <span class="pill">OpenAI / Codex</span>
+            <span class="pill">Cursor</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <div class="skill-block-title">Governance & Compliance</div>
+          <div class="pill-wrap">
+            <span class="pill-teal">ISO 42001</span>
+            <span class="pill-teal">EU AI Act</span>
+            <span class="pill">SOC 2</span>
+            <span class="pill">GDPR</span>
+            <span class="pill">HIPAA</span>
+            <span class="pill">CCPA / PIPEDA</span>
+            <span class="pill">PCI-DSS</span>
+            <span class="pill">Drata · Vanta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" style="border-bottom:none;" aria-label="Contact">
+    <div class="container">
+      <div class="section-eyebrow">Contact</div>
+      <div class="contact-grid">
+        <div>
+          <h2 class="contact-headline">Let's build<br>something real.</h2>
+          <p class="contact-sub">
+            Open to AI platform roles, governance consulting, and teams building at the intersection of engineering and responsible AI — especially in Palo Alto and the Bay Area.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:askaashna@gmail.com" class="contact-btn-primary">askaashna@gmail.com</a>
+            <a href="https://linkedin.com/in/aashnasethii" target="_blank" rel="noopener" class="contact-btn">LinkedIn</a>
+            <a href="#" class="contact-btn">GitHub</a>
+          </div>
+        </div>
+        <div class="avatar" aria-hidden="true">AS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-left">© 2026 Aashna Sethi · Vancouver, BC</span>
+        <div class="footer-right">
+          <a href="mailto:askaashna@gmail.com">Email</a>
+          <a href="https://linkedin.com/in/aashnasethii" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const links  = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    toggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') links.classList.toggle('open'); });
+
+    // Close mobile nav on link click
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    // Smooth fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.exp-item, .skill-block, .stat-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
