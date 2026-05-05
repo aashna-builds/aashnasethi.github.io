@@ -116,10 +116,10 @@
     }
 
     .nav-logo {
-      font-size: 15px;
-      font-weight: 500;
+      font-size: 22px;
+      font-weight: 600;
       color: var(--text-1);
-      letter-spacing: -0.3px;
+      letter-spacing: -0.6px;
       text-decoration: none;
     }
 
@@ -170,7 +170,7 @@
        HERO
     ===================== */
     .hero {
-      padding: 96px 0 80px;
+      padding: 72px 0 60px;
       border-bottom: 0.5px solid var(--border);
     }
 
@@ -314,7 +314,7 @@
        SECTION BASE
     ===================== */
     .section {
-      padding: 72px 0;
+      padding: 56px 0;
       border-bottom: 0.5px solid var(--border);
     }
 
@@ -356,14 +356,13 @@
     /* =====================
        ABOUT
     ===================== */
-    /* Portrait */
+    /* Portrait — dark editorial style */
     .about-portrait {
       width: 100%;
-      max-width: 340px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 0.5px solid var(--border-md);
       aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
     }
     .about-portrait img {
       width: 100%;
@@ -371,6 +370,18 @@
       object-fit: cover;
       object-position: center top;
       display: block;
+      filter: contrast(1.15) brightness(0.88) grayscale(0.12);
+    }
+    /* Vignette: fades all edges into site bg */
+    .about-portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 38%, rgba(10,10,10,0.72) 100%),
+        linear-gradient(to bottom, rgba(10,10,10,0.18) 0%, transparent 25%, transparent 60%, rgba(10,10,10,0.82) 100%),
+        linear-gradient(to right, rgba(10,10,10,0.45) 0%, transparent 35%, transparent 65%, rgba(10,10,10,0.45) 100%);
+      pointer-events: none;
     }
 
     .about-grid {
@@ -630,17 +641,33 @@
     }
 
     .coffee-photo-wrap {
-      border-radius: var(--radius-lg);
+      border-radius: 4px;
       overflow: hidden;
-      border: 0.5px solid var(--border-md);
-      aspect-ratio: 4/3;
+      aspect-ratio: 3/4;
+      position: relative;
     }
     .coffee-photo-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center 15%;
       display: block;
+      filter: contrast(1.12) brightness(0.85) grayscale(0.08);
+    }
+    .coffee-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 40%, rgba(10,10,10,0.68) 100%),
+        linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, transparent 30%, transparent 55%, rgba(10,10,10,0.75) 100%),
+        linear-gradient(to right, rgba(10,10,10,0.4) 0%, transparent 30%, transparent 70%, rgba(10,10,10,0.4) 100%);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse at center, transparent 40%, rgba(10,10,10,0.68) 100%),
+        linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, transparent 30%, transparent 55%, rgba(10,10,10,0.75) 100%);
+      background-blend-mode: normal;
+      opacity: 0.85;
+      pointer-events: none;
     }
 
     .order-card {
@@ -867,7 +894,7 @@
             Most people either build AI systems or govern them. I do both. My background spans full-stack AI platform engineering, law, and compliance infrastructure — which means I can ship production tooling and design the policy layer on top of it.
           </p>
           <p class="section-body">
-            At SOCi I architected a company-wide AI platform from zero — including agent intake systems, vendor review tooling, and a compliance co-pilot — while simultaneously leading AI governance strategy. Before that, I led ISO 42001 certification across three SaaS brands, making them among the earliest to achieve the standard.
+            At SOCi I architected a company-wide AI platform from zero and led ISO 42001 certification — building the governance framework that made them among the earliest SaaS companies to achieve the standard.
           </p>
           <p class="section-body">
             I've been engaged in the AI space since 2018. I'm fluent in the language of engineering teams and legal teams, which means I build things both sides can actually use.
@@ -892,7 +919,7 @@
 
         <!-- Portrait -->
         <div class="about-portrait">
-          <img src="assets/portrait.jpg" alt="Aashna Sethi" loading="lazy" />
+          <img src="assets/finalheadshot.png" alt="Aashna Sethi" loading="lazy" />
         </div>
 
         <!-- Stats -->
@@ -932,10 +959,11 @@
           </div>
           <div>
             <div class="exp-company">SOCi</div>
-            <div class="exp-role">AI Platform Engineer · AI & Privacy Analyst</div>
+            <div class="exp-role">AI Enablement · AI Governance</div>
             <ul class="exp-bullets">
               <li>Architected and shipped a full-stack AI platform from zero — production-grade, deployed company-wide, built entirely with Next.js, Claude, Claude Code, and GitHub.</li>
               <li>Engineered platform modules including an AI agent approval system, vendor security review tool powered by Claude, a compliance co-pilot for security questionnaires, and an internal agent registry with risk-tier classification.</li>
+              <li>Led ISO 42001 (AI Management System) certification — designed the governance framework, scoped the program, and drove cross-functional alignment across Legal, Engineering, and Product.</li>
               <li>Designed and enforced AI governance controls across the organization — authored policy, defined risk tiers, built agent intake workflows, and established guardrails for GitHub Copilot and AI coding tools.</li>
               <li>Built and launched a company-wide AI training program: interactive web-based course with assessment, certification tracking, and multi-track live curriculum from AI fundamentals to Claude Code.</li>
             </ul>
@@ -951,9 +979,9 @@
             <div class="exp-company">Unbounce / Insightly / LeadsRx</div>
             <div class="exp-role">Data Privacy & Compliance Specialist · DPO</div>
             <ul class="exp-bullets">
-              <li>Led ISO 42001 (AI Management System) certification — one of the earliest SaaS organizations to achieve this standard. Scoped the program, built the compliance infrastructure, coordinated across Legal, Engineering, and Product.</li>
-              <li>Acted as DPO across three SaaS brands; governed AI feature rollouts by conducting DPIAs, reviewing AI vendor security postures, and enforcing compliance controls on ML-powered product capabilities.</li>
-              <li>Operationalized SOC 2 and GDPR compliance using Drata and Vanta — automating evidence collection, vendor risk workflows, and audit readiness across engineering and product teams.</li>
+              <li>Acted as DPO across three SaaS brands — governed AI feature rollouts by conducting DPIAs, reviewing AI vendor security postures, and enforcing compliance controls on ML-powered product capabilities.</li>
+              <li>Operationalized SOC 2, PCI-DSS, and GDPR compliance using Drata and Vanta — automating evidence collection, vendor risk workflows, and audit readiness across engineering and product teams.</li>
+              <li>Built and maintained privacy infrastructure across Unbounce, Insightly, and LeadsRx including data mapping, breach response protocols, and cross-border transfer mechanisms.</li>
             </ul>
           </div>
         </div>
