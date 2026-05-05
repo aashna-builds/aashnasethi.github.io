@@ -411,16 +411,7 @@
       object-position: center top;
       display: block;
     }
-    .hero-portrait::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, #0A0A0A 0%, transparent 20%, transparent 72%, #0A0A0A 100%),
-        linear-gradient(to right, #0A0A0A 0%, transparent 12%, transparent 55%, #0A0A0A 100%),
-        linear-gradient(to top, transparent 80%, #0A0A0A 100%);
-      pointer-events: none;
-    }
+    /* vignette baked into image alpha — no overlay needed */
 
     /* Quote */
     .quote-section {
@@ -935,7 +926,7 @@
 
         <!-- Portrait -->
         <div class="hero-portrait">
-          <img src="assets/finalheadshot.jpg" alt="Aashna Sethi" />
+          <img src="assets/finalheadshot.png" alt="Aashna Sethi" />
         </div>
       </div>
     </div>
